@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html ng-app="manipulareApp" >
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Manipulare</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="src/libraries/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="src/assets/css/simple-sidebar.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="src/libraries/angular/angular.js" type="text/javascript"></script>
+    <script src="src/controllers/listcontroller.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+    <div id="wrapper">
+        <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="#">
+                        Manipulare
+                    </a>
+                </li>
+                <li>
+                    <a href="#">Overview</a>
+                </li>
+                <li>
+                    <a href="#"></a>
+                </li>
+                <li>
+                    <a href="index.html">Companies</a>
+                </li>
+                <li>
+                    <a href="querying.html">Querying</a>
+                </li>
+            </ul>
+        </div>
+        <!-- /#sidebar-wrapper -->
+
+        <!-- Page Content
+            Make sure to keep the content between the #page-container-wrapper.
+        -->
+    <div id="page-content-wrapper">
+        <div class="container-fluid">
+            <a href="#menu-toggle" class="btn btn-default col-sm-1" id="menu-toggle"><i class="glyphicon glyphicon-menu-hamburger"></i></a>
+            <div class="row">
+                <div class=" col-lg-12" >
+
+                        <h1>Manipulare Database Information Workspace</h1>
+
+                     <div class="panel-group" id="accordion" role="tablist" ng-controller="listController as list">
+                        <div class="panel panel-info" ng-repeat="company in list.companies">
+                            <div class="panel-heading" role="tab" >
+                                <h4 class="panel-title" >
+                                    <a role="button" id="headingOne" data-toggle="collapse" data-parent="#accordion" ng-href="#{{company.name}}">
+                                            {{company.name}}
+                                    </a>
+                                </h4>
+                            </div>
+                            <div class="panel-collapse collapse" id="{{company.name}}">
+                                <form role="form" >
+                                    <div class="panel-body" >
+                                        <div class="form-group" ng-repeat="(key, info) in company.values track by $index">
+                                            <label for="{{key}}">{{key}}</label>
+                                            <span id="true" ng-if="key != 'JSConfig'">
+                                                <input  class="form-control input-group" type="text" name="{{key}}" id="" value="{{info}}" ng-disabled="!checked">
+                                            </span>
+                                        </div>
+                                        <div class="form-group" ng-repeat="(key, info) in company.values.JSConfig">
+                                            <label for="{{key}}">{{key}}</label>
+                                            <span ng-if="key != 'PDFTemplates'">
+                                                <input  class="form-control input-group" type="text" name="{{key}}" id="" value="{{info}}" ng-disabled="!checked">
+                                            </span>
+
+                                        </div>
+                                        <div class="form-group" ng-repeat="(name, value) in company.values.JSConfig.PDFTemplates">
+                                            <label for="{{name}}">{{name}}</label>
+                                            <input  class="form-control input-group" type="text" name="{{name}}" id="" value="{{name}}" ng-disabled="!checked">
+                                            <div ng-repeat="(key, data) in company.values.JSConfig.PDFTemplates.info">
+                                                <label for="{{key}}">{{key}}</label>
+                                                <input  class="form-control input-group" type="text" name="{{key}}" id="" value="{{data}}" ng-disabled="!checked">
+                                            </div>
+                                        </div>
+
+                                        <label>Enable editing: <input type="checkbox" ng-model="checked"></label><br/>
+                                        <button type="button" class="btn btn-primary" ng-model="button">Save</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+        <!-- /#page-content-wrapper -->
+
+    </div>
+    <!-- /#wrapper -->
+
+    <!-- jQuery -->
+    <script src="src/libraries/jquery/jquery-1.12.1.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="src/libraries/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Menu Toggle Script -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+
+
+    </script>
+
+</body>
+</html>

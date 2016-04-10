@@ -1,0 +1,22 @@
+<?php
+
+$serverName = "Mikal\SQLEXPRESS";
+$connectionInfo = array("Database" => "testing");
+
+$conn = sqlsrv_connect($serverName, $connectionInfo);
+
+if( $conn === false ) {
+     die( print_r( sqlsrv_errors(), true));
+}
+
+$sql = "SELECT * FROM fruits";
+
+$stmt = sqlsrv_query($conn, $sql);
+
+if($stmt === false) {
+    die( print_r( sqlsrv_errors(), true));
+}
+
+
+
+ ?>
