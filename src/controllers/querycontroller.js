@@ -5,18 +5,39 @@
 * Description
 */
 angular.module('manipulareApp', [])
-    .controller('queryController', function($http, $scope) {
-
+    .controller('queryController', function($scope, $http) {
+        var query = this;
 
         $scope.querySubmit = function() {
-            $scope.data = document.getElementById('query').value;
-            console.log($scope.data);
+            var input = document.getElementById('query').value;
+            var jsoninput = { 'query': input };
+            console.log(document.getElementById('query').value);
+
+            // $http.post('../manipulare/src/assets/php-ajax/query-ajax.php', input)
+            // .success(function(data, status, headers, config)
+            // {
+            //     console.log(status + ' - ' + data);
+            // })
+            // .error(function(data, status, headers, config)
+            // {
+            //     console.log('error');
+            // });
 
             var request = $http({
-                data: $scope.data,
-                dataType: "string",
-                method: "post",
-                url: "../manipulare/src/assets/php-ajax/query-ajax.php"
-            })
-        }
+                url: "../mdiw/src/assets/php-ajax/query-ajax.php",
+                method: "POST",
+                contentType: 'json',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                data: {
+                    query: document.getElementById('query').value
+                },
+            }).
+            success(function(data){
+                console.log(data);
+
+            }).
+            error(function(data) {
+                console.log("memes");
+            });
+        };
     });
