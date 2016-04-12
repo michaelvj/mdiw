@@ -5,7 +5,6 @@
 * Description
 */
 angular.module('manipulareApp', [])
-
     .controller('listController', function($scope, $http){
             var list = this;
         angular.element(document).ready(function (){
