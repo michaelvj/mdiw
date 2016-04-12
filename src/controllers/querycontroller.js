@@ -6,12 +6,12 @@
 */
 angular.module('manipulareApp', [])
     .controller('queryController', function($scope, $http) {
-
+        var query = this;
 
         $scope.querySubmit = function() {
             var input = document.getElementById('query').value;
             var jsoninput = { 'query': input };
-            console.log(jsoninput);
+            console.log(document.getElementById('query').value);
 
             // $http.post('../manipulare/src/assets/php-ajax/query-ajax.php', input)
             // .success(function(data, status, headers, config)
@@ -24,14 +24,17 @@ angular.module('manipulareApp', [])
             // });
 
             var request = $http({
-                dataType: "json",
+                url: "../mdiw/src/assets/php-ajax/query-ajax.php",
                 method: "POST",
-                data: jsoninput,
-                url: "../manipulare/src/assets/php-ajax/query-ajax.php"
+                contentType: 'json',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+                data: {
+                    query: document.getElementById('query').value
+                },
             }).
             success(function(data){
-                var queryresult = data
-                console.log(queryresult);
+                console.log(data);
+
             }).
             error(function(data) {
                 console.log("memes");
