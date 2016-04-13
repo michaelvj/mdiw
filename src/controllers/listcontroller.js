@@ -9,7 +9,7 @@ angular.module('manipulareApp', [])
     .controller('listController', function($scope, $http){
             var list = this;
         angular.element(document).ready(function (){
-
+            list.isDisabled = true;
             var request = $http({
                 dataType: "json",
                 method: "post",
@@ -29,8 +29,15 @@ angular.module('manipulareApp', [])
 
             });
 
-            var saveConfig = function(){
-
+            $scope.enableEdit = function(id) {
+                if(list.isDisabled) {
+                    $('#' + id + ' :input').attr('disabled', false);
+                    console.log(id);
+                    list.isDisabled = false;
+                } else {
+                    $('#' + id + ' :input').attr('disabled', true);
+                    list.isDisabled = true;
+                }
             }
 
         });
