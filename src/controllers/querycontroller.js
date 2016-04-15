@@ -24,7 +24,7 @@ angular.module('manipulareApp', [])
             // });
 
             var request = $http({
-                url: "../mdiw/src/assets/php-ajax/query-ajax.php",
+                url: "../src/assets/php-ajax/query-ajax.php",
                 method: "POST",
                 contentType: 'json',
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
