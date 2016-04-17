@@ -3,19 +3,28 @@
 *
 * Description
 */
-angular.module('manipulareApp', [])
-    .config(['$routeProvider',
-        function($routeProvider) {
-        $routeProvider.
-            when('/compconfig', {
-                templateUrl: 'templates/compconfig.html',
-                controller: 'listController'
-            }).
-            when('/querying', {
-                templateUrl: 'templates/querying.html',
-                controller: 'queryController'
-            }).
-            otherwise({
-                redirectTo: '/index'
-            });
-    }]);
+/**
+* manipulareApp Module
+*
+* Description
+*/
+angular.module('manipulareApp', ['ui-router'])
+    .config(function($stateProvider, $urlRouterProvider) {
+        $urlRouterProvider.otherwise('/home');
+
+        $stateProvider
+
+        .state('home', {
+            url: '/index',
+            templateUrl: 'index.html'
+        })
+
+        .state('querying', {
+            url: '/querying',
+            templateUrl: 'index.html'
+        })
+
+        .state('complist', {
+            url: '/complist'
+        })
+    })
