@@ -1,0 +1,38 @@
+{
+  "name": "mdiw",
+  "version": "1.0.0",
+  "description": "Manipulare Database Information Workspace",
+  "main": "app.js",
+  "dependencies": {
+    "angular": "^1.5.5",
+    "angular-ui-router": "^0.2.18",
+    "bootstrap": "^3.3.6",
+    "jquery": "^2.2.3",
+    "karma": "^0.13.22",
+    "karma-cli": "^0.1.2"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-firefox-launcher": "^1.0.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michaelvj/mdiw.git"
+  },
+  "keywords": [
+    "mdiw",
+    "angular",
+    "angularjs",
+    "ui-router"
+  ],
+  "author": "Michael van Jelgerhuis",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/michaelvj/mdiw/issues"
+  },
+  "homepage": "https://github.com/michaelvj/mdiw#readme"
+}

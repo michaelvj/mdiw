@@ -10,11 +10,11 @@
 */
 angular.module('manipulareApp', ['ui-router'])
     .config(function($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/home');
+        $urlRouterProvider.otherwise('/');
 
         $stateProvider
 
-        .state('home', {
+        .state('index', {
             url: '/index',
             templateUrl: 'index.html'
         })
