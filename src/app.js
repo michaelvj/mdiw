@@ -3,11 +3,6 @@
 *
 * Description
 */
-/**
-* manipulareApp Module
-*
-* Description
-*/
 angular.module('manipulareApp', ['ui-router'])
     .config(function($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/');
@@ -21,10 +16,17 @@ angular.module('manipulareApp', ['ui-router'])
 
         .state('querying', {
             url: '/querying',
-            templateUrl: 'index.html'
+            templateUrl: 'index.html',
+            controller: 'querying'
         })
 
-        .state('complist', {
-            url: '/complist'
+        .state('compconfig', {
+            url: '/app/compconfig',
+            templateUrl: '/app/compconfig/compconfig.html',
+            controller: 'compconfig'
+        })
+
+        .state('list', {
+            url: '/list/'
         })
     })

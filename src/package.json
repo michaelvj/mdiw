@@ -12,6 +12,7 @@
     "karma-cli": "^0.1.2"
   },
   "devDependencies": {
+    "angular-ui-router": "^0.2.18",
     "grunt": "^1.0.1",
     "karma-chrome-launcher": "^1.0.1",
     "karma-firefox-launcher": "^1.0.0"
