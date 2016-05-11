@@ -3,30 +3,44 @@
 *
 * Description
 */
-angular.module('manipulareApp', ['ui-router'])
-    .config(function($stateProvider, $urlRouterProvider) {
-        $urlRouterProvider.otherwise('/');
+var Manipulare = angular.module('Manipulare', ['ui.router']);
+    
 
-        $stateProvider
 
-        .state('index', {
-            url: '/index',
-            templateUrl: 'index.html'
-        })
+Manipulare.config(['$stateProvider', '$urlRouterProvider', function($stateProvider, $urlRouterProvider) {
+    $urlRouterProvider.otherwise('/list');
 
-        .state('querying', {
-            url: '/querying',
-            templateUrl: 'index.html',
-            controller: 'querying'
-        })
-
-        .state('compconfig', {
-            url: '/app/compconfig',
-            templateUrl: '/app/compconfig/compconfig.html',
-            controller: 'compconfig'
-        })
-
-        .state('list', {
-            url: '/list/'
-        })
+    $stateProvider
+    .state('app', {
+        url: '',
+        abstract: true,
+        templateUrl: 'app.html'
     })
+    .state('app.querying', {
+        url: '/querying',
+        templateUrl: '/app/querying/querying.html',
+        controller: 'queryingCtrl',
+        controllerAs: 'vm'
+    })
+
+    .state('app.compconfig', {
+        url: '/compconfig',
+        templateUrl: '/app/compconfig/compconfig.html',
+        controller: 'compconfigCtrl',
+        controllerAs: 'vm'
+    })
+
+    .state('app.list', {
+        url: '/list',
+        templateUrl: '/app/list/list.html',
+        controller: 'listCtrl',
+        controllerAs: 'vm'
+    });
+}]);
+
+Manipulare.run(['$rootScope', '$state', '$stateParams', function ($rootScope, $state, $stateParams) {
+// Set reference to access them from any scope
+$rootScope.$state = $state;
+$rootScope.$stateParams = $stateParams;
+}
+]);
