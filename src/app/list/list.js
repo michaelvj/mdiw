@@ -29,12 +29,14 @@ Manipulare.controller('listCtrl', function($scope, $http){
 
             $scope.enableEdit = function(id) {
                 if(list.isDisabled) {
-                    $('#' + id + ' :input').attr('disabled', false);
+                    $('#' + id + ' input').prop('disabled', false);
                     console.log(id);
                     list.isDisabled = false;
+                    console.log(list.isDisabled);
                 } else {
-                    $('#' + id + ' :input').attr('disabled', true);
+                    $('#' + id + ' input').prop('disabled', true);
                     list.isDisabled = true;
+                    console.log(list.isDisabled);
                 }
             }
 

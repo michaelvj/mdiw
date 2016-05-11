@@ -1,8 +1,10 @@
+'use strict';
 /**
 * manipulareApp Module
 *
 * Description
 */
+
 var Manipulare = angular.module('Manipulare', ['ui.router']);
     
 

@@ -1,6 +1,6 @@
-        <!-- Page Content
-            Make sure to keep the content between the #page-container-wrapper.
-        -->
+<!-- Page Content
+    Make sure to keep the content between the #page-container-wrapper.
+-->
     <div id="page-content-wrapper">
         <div class="container-fluid">
             <div class="row">
@@ -44,8 +44,8 @@
                                             </div>
                                         </div>
 
-                                        <button id="{{company.name}}btn" type="button" class="btn btn-primary" ng-if="list.isDisabled" ng-click="enableEdit(company.name)" >Edit</button>
-                                        <span ng-if="!list.isDisabled">
+                                        <button id="{{company.name}}btn" type="button" class="btn btn-primary" ng-if="isDisabled" ng-click="enableEdit(company.name)" >Edit</button>
+                                        <span ng-if="!isDisabled">
                                             <button type="button" class="btn btn-primary" >Save</button>
                                             <button id="{{company.name}}btn" type="button" class="btn btn-primary" ng-click="enableEdit(company.name)" >Cancel</button>
                                         </span>
@@ -59,4 +59,4 @@
             </div>
         </div>
     </div>
-        <!-- /#page-content-wrapper -->
+<!-- /#page-content-wrapper -->

@@ -1,5 +1,5 @@
+'use strict';
 Manipulare.directive('navBar', function(){
-	'use strict';
 	// Runs during compile
 	var html = '<div id="sidebar-wrapper">' +
         '    <ul class="sidebar-nav">' +
