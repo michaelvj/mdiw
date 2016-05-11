@@ -4,9 +4,7 @@
 *
 * Description
 */
-angular.module('manipulareApp', [])
-
-    .controller('listController', function($scope, $http){
+Manipulare.controller('listCtrl', function($scope, $http){
             var list = this;
         angular.element(document).ready(function (){
             list.isDisabled = true;

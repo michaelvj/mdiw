@@ -4,8 +4,8 @@
 *
 * Description
 */
-angular.module('manipulareApp', [])
-    .controller('queryController', function($scope, $http) {
+Manipulare
+    .controller('queryingCtrl', function($scope, $http) {
         var query = this;
 
         $scope.querySubmit = function() {
