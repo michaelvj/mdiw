@@ -15,3 +15,8 @@ Executing queries on databases linked to selected company
 
 Database - querying
 Executing queries on selected database
+
+
+Change sidebar to static top navbar
+
+Update bootstrap functionality to ui-bootstrap
