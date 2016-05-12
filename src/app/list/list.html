@@ -4,55 +4,54 @@
     <div id="page-content-wrapper">
         <div class="container-fluid">
             <div class="row">
-                <div class=" col-lg-offset-2" >
 
-                        <h1>Manipulare Database Information Workspace</h1>
 
-                     <div class="panel-group" id="accordion" role="tablist">
-                        <div class="panel panel-info" ng-repeat="company in vm.companies">
-                            <div class="panel-heading" role="tab" >
-                                <h4 class="panel-title" >
-                                    <a role="button" id="headingOne" data-toggle="collapse" data-parent="#accordion" ng-href="#{{company.name}}">
-                                            {{company.name}}
-                                    </a>
-                                </h4>
-                            </div>
+                    <h1>Manipulare Database Information Workspace</h1>
 
-                            <div class="panel-collapse collapse" id="{{company.name}}">
-                                <button id="{{company.name}}sql" class="btn btn-primary col-lg-2 col-lg-offset-10">Execute query on {{company.name}}</button>
-                                <form role="form" >
-                                    <div class="panel-body" >
-                                        <div class="form-group" ng-repeat="(key, info) in company.values track by $index">
-                                            <label for="{{key}}">{{key}}</label>
-                                            <span id="true" ng-if="key != 'JSConfig'">
-                                                <input  class="form-control input-group" type="text" name="{{key}}" id="" value="{{info}}" disabled>
-                                            </span>
-                                        </div>
-                                        <div class="form-group" ng-repeat="(key, info) in company.values.JSConfig">
-                                            <label for="{{key}}">{{key}}</label>
-                                            <span ng-if="key != 'PDFTemplates'">
-                                                <input  class="form-control input-group" type="text" name="{{key}}" id="" value="{{info}}" disabled>
-                                            </span>
+                 <div class="panel-group" id="accordion" role="tablist">
+                    <div class="panel panel-info" ng-repeat="company in vm.companies">
+                        <div class="panel-heading" role="tab" >
+                            <h4 class="panel-title" >
+                                <a role="button" id="headingOne" data-toggle="collapse" data-parent="#accordion" ng-href="#/home/app/list/#{{company.name}}">
+                                        {{company.name}}
+                                </a>
+                            </h4>
+                        </div>
 
-                                        </div>
-                                        <div class="form-group" ng-repeat="(name, value) in company.values.JSConfig.PDFTemplates">
-                                            <label for="{{name}}">{{name}}</label>
-                                            <input  class="form-control input-group" type="text" name="{{name}}" id="" value="{{name}}" disabled>
-                                            <div ng-repeat="(key, data) in company.values.JSConfig.PDFTemplates.info">
-                                                <label for="{{key}}">{{key}}</label>
-                                                <input  class="form-control input-group" type="text" name="{{key}}" id="" value="{{data}}" disabled>
-                                            </div>
-                                        </div>
-
-                                        <button id="{{company.name}}btn" type="button" class="btn btn-primary" ng-if="isDisabled" ng-click="enableEdit(company.name)" >Edit</button>
-                                        <span ng-if="!isDisabled">
-                                            <button type="button" class="btn btn-primary" >Save</button>
-                                            <button id="{{company.name}}btn" type="button" class="btn btn-primary" ng-click="enableEdit(company.name)" >Cancel</button>
+                        <div class="panel-collapse collapse" id="{{company.name}}">
+                            <button id="{{company.name}}sql" class="btn btn-primary col-lg-2 col-lg-offset-10">Execute query on {{company.name}}</button>
+                            <form role="form" >
+                                <div class="panel-body" >
+                                    <div class="form-group" ng-repeat="(key, info) in company.values track by $index">
+                                        <label for="{{key}}">{{key}}</label>
+                                        <span id="true" ng-if="key != 'JSConfig'">
+                                            <input  class="form-control input-group" type="text" name="{{key}}" id="" value="{{info}}" disabled>
+                                        </span>
+                                    </div>
+                                    <div class="form-group" ng-repeat="(key, info) in company.values.JSConfig">
+                                        <label for="{{key}}">{{key}}</label>
+                                        <span ng-if="key != 'PDFTemplates'">
+                                            <input  class="form-control input-group" type="text" name="{{key}}" id="" value="{{info}}" disabled>
                                         </span>
 
                                     </div>
-                                </form>
-                            </div>
+                                    <div class="form-group" ng-repeat="(name, value) in company.values.JSConfig.PDFTemplates">
+                                        <label for="{{name}}">{{name}}</label>
+                                        <input  class="form-control input-group" type="text" name="{{name}}" id="" value="{{name}}" disabled>
+                                        <div ng-repeat="(key, data) in company.values.JSConfig.PDFTemplates.info">
+                                            <label for="{{key}}">{{key}}</label>
+                                            <input  class="form-control input-group" type="text" name="{{key}}" id="" value="{{data}}" disabled>
+                                        </div>
+                                    </div>
+
+                                    <button id="{{company.name}}btn" type="button" class="btn btn-primary" ng-if="isDisabled" ng-click="enableEdit(company.name)" >Edit</button>
+                                    <span ng-if="!isDisabled">
+                                        <button type="button" class="btn btn-primary" >Save</button>
+                                        <button id="{{company.name}}btn" type="button" class="btn btn-primary" ng-click="enableEdit(company.name)" >Cancel</button>
+                                    </span>
+
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>

@@ -3,34 +3,33 @@
 -->
 <div id="page-content-wrapper">
     <div class="container-fluid">
-        <a href="#menu-toggle" class="btn btn-default col-lg-1" style="padding-bottom: 5px;" id="menu-toggle"><i class="glyphicon glyphicon-menu-hamburger"></i></a>
         <div class="row" style="padding-top: 5px;">
-            <div class=" col-lg-offset-2" >
 
-                    <h1>MDIW - Querying</h1>
 
-                <div class="col-lg-12 row">
-                    <div class="panel panel-info">
-                        <div class="panel-heading">
-                            Querying
-                        </div>
-                        <div class="panel-body">
-                            <textarea id="query" class="form-control" rows="3" tabindex="100" cols="40" placeholder="Enter query here..."></textarea>
-                            <button ng-click="querySubmit()" type="button" class="btn btn-primary margin-tlr-5" ng-model="button">Execute query</button>
-                        </div>
+                <h1>MDIW - Querying</h1>
+
+            <div class="col-lg-12 row">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        Querying
                     </div>
-                </div>
-                <div class="col-lg-12 row">
-                    <div class="panel panel-warning">
-                        <div class="panel-heading">
-                            Query result
-                        </div>
-                        <div class="panel-body">
-                            <span>The query result will appear here...</span>
-                        </div>
+                    <div class="panel-body">
+                        <textarea id="query" class="form-control" rows="3" tabindex="100" cols="40" placeholder="Enter query here..."></textarea>
+                        <button ng-click="querySubmit()" type="button" class="btn btn-primary margin-tlr-5" ng-model="button">Execute query</button>
                     </div>
                 </div>
             </div>
+            <div class="col-lg-12 row">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        Query result
+                    </div>
+                    <div class="panel-body">
+                        <span>The query result will appear here...</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
