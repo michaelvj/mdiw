@@ -9,10 +9,7 @@ Manipulare.directive('navBar', function(){
 		'			</a>' +
 		'		</li>' +
 		'		<li>' +
-	    '			<a href="#/memes">Overview</a>' +
-		'		</li>' +
-		'		<li>' +
-		'			<a href="#"></a>' +
+	    '			<a href="#/compconfig">Overview</a>' +
 		'		</li>' +
 		'		<li>' +
 		'			<a href="#/list">Companies</a>' +
