@@ -7,7 +7,7 @@
 ## CRUD
 
 ### Company - compconfig/list
-	- Creating new company server configurations - Using bootstrap modal with preset host-user-pass-dbname based on the company name
+	- Creating new company server configurations - Using bootstrap modal with preset ```host-user-pass-dbname``` based on the company name
 	- Showing company server information
 	- Editing company server information
 	- Deleting company server information / Selected fields of company server information
