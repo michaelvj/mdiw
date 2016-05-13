@@ -16,6 +16,7 @@ Executing queries on databases linked to selected company
 Database - querying
 Executing queries on selected database
 
+Add proper routing functionality with named views. ui-router
 
 Change sidebar to static top navbar
 
