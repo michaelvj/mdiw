@@ -61,13 +61,14 @@
         -->
     <div id="page-content-wrapper">
         <div class="container-fluid">
-            <a href="#menu-toggle" class="btn btn-default col-sm-1" id="menu-toggle"><i class="glyphicon glyphicon-menu-hamburger"></i></a>
-            <div class="row">
-                <div class=" col-lg-12" >
-
+            
                         <h1>Manipulare Database Information Workspace</h1>
-
-                     <div class="panel-group" id="accordion" role="tablist" ng-controller="listController as list">
+                        <a href="#menu-toggle" class="btn btn-default col-lg-1" id="menu-toggle"><i class="glyphicon glyphicon-menu-hamburger"></i></a>
+                        
+            <div class="row" ng-controller="listController as list">
+            <button class="btn btn-default col-lg-2 col-lg-offset-10" ng-click="newComp()">Add new configuration</button>
+                <div class="col-lg-12">
+                     <div class="panel-group" id="accordion" role="tablist">
                         <div class="panel panel-info" ng-repeat="company in list.companies">
                             <div class="panel-heading" role="tab" >
                                 <h4 class="panel-title" >

@@ -7,9 +7,9 @@
 angular.module('manipulareApp', [])
 
     .controller('listController', function($scope, $http){
-            var list = this;
+            var vm = this;
         angular.element(document).ready(function (){
-            list.isDisabled = true;
+            vm.isDisabled = true;
             var request = $http({
                 dataType: "json",
                 method: "post",
@@ -18,27 +18,29 @@ angular.module('manipulareApp', [])
             });
 
             request.success(function(data) {
-                list.companies =[];
-                list.names = [];
+                vm.companies =[];
+                vm.names = [];
                 $.each(data, function(key, element) {
-                    list.companies.push({'name' : key, 'values' : element});
-                    list.names.push(key);
+                    vm.companies.push({'name' : key, 'values' : element});
+                    vm.names.push(key);
                 });
-                console.log(list.companies);
-                console.log(list.names);
+                console.log(vm.companies);
+                console.log(vm.names);
 
             });
 
             $scope.enableEdit = function(id) {
-                if(list.isDisabled) {
-                    $('#' + id + ' :input').attr('disabled', false);
+                if(vm.isDisabled) {
+                    $('#' + id + ' input').attr('disabled', false);
                     console.log(id);
-                    list.isDisabled = false;
+                    vm.isDisabled = false;
                 } else {
-                    $('#' + id + ' :input').attr('disabled', true);
-                    list.isDisabled = true;
+                    $('#' + id + ' input').attr('disabled', true);
+                    vm.isDisabled = true;
                 }
             }
-
+            $scope.newComp = function() {
+                console.log("memes");
+            }
         });
     });
