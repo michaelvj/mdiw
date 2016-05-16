@@ -40,7 +40,13 @@ angular.module('manipulareApp', [])
                 }
             }
             $scope.newComp = function() {
-                console.log("memes");
+                var company = window.prompt('Vul een bedrijfsnaam in.');
+
+                if(company !== "") {
+                    console.log(company);
+                }
             }
+
+
         });
     });

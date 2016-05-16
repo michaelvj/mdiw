@@ -14,6 +14,12 @@
 
 ### Company - compconfig/list
 	- Creating new company server configurations - Using bootstrap modal with preset host-user-pass-dbname based on the company name
+        - Initialize a prompt with the company name desired.
+        - Initialize a bootstrap modal with generated fields : host-user-pass-DBName
+            - host: ip
+            - User: Company name
+            - pass: Password
+            - DBName: {applicationname}_{Company name}.{applicationname}.nl
 	- Showing company server information
 	- Editing company server information
 	- Deleting company server information / Selected fields of company server information
