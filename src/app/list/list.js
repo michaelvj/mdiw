@@ -7,7 +7,7 @@
 angular.module('manipulareApp', [])
 
     .controller('listController', function($scope, $http){
-            var vm = this;
+        var vm = this;
         angular.element(document).ready(function (){
             vm.isDisabled = true;
             var request = $http({
@@ -28,6 +28,7 @@ angular.module('manipulareApp', [])
                 console.log(vm.names);
 
             });
+        });
 
             $scope.enableEdit = function(id) {
                 if(vm.isDisabled) {
@@ -39,14 +40,39 @@ angular.module('manipulareApp', [])
                     vm.isDisabled = true;
                 }
             }
-            $scope.newComp = function() {
-                var company = window.prompt('Vul een bedrijfsnaam in.');
 
-                if(company !== "") {
-                    console.log(company);
+            $scope.makeUrl = function(company, application) {
+                vm.company = company;
+                vm.application = application;
+                switch(vm.application) {
+                    case "biom":
+                        vm.applicationurl = 'biom.nl';
+                        break;
+                    case "columbo":
+                        vm.applicationurl = 'inspectionworld.nl';
+                        break;
+                }
+
+                vm.url = vm.application + '_' + vm.company + '.' + vm.applicationurl;
+                return vm.url;
+            }
+            /**
+             * [newComp description]
+             * @return {[type]} [description]
+             */
+            $scope.newComp = function() {
+                vm.company = window.prompt('Vul een bedrijfsnaam in.');
+                vm.application = window.prompt('Vul de applicatie in.');
+
+                if(vm.company !== "") {
+                    console.log(vm.company);
+                    console.log(vm.application);
+                    
+                    vm.url = $scope.makeUrl(vm.company, vm.application);
+                    console.log(vm.url);
                 }
             }
 
 
-        });
+
     });
