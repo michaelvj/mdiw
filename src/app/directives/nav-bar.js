@@ -15,7 +15,6 @@ Manipulare.directive('navBar', function(){
 		'</div>' +
 		'<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">' +
 			'<ul class="nav navbar-nav">' +
-				'<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>' +
 				'<li><a href="#/compconfig">Overview</a></li>' +
 				'<li><a href="#/list">Companies</a></li>' +
 				'<li><a href="#/querying">Querying</a></li>' +
