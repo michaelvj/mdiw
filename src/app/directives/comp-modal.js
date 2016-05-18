@@ -1,7 +1,6 @@
 'use-strict';
 Manipulare.directive('compModal', function(){
     // Runs during compile
-    var html = ''
     return {
         // name: '',
         // priority: 1,
@@ -15,8 +14,8 @@ Manipulare.directive('compModal', function(){
         // replace: true,
         // transclude: true,
         // compile: function(tElement, tAttrs, function transclude(function(scope, cloneLinkingFn){ return function linking(scope, elm, attrs){}})),
-        link: function($scope, iElm, iAttrs, controller) {
-
-        }
+        restrict: 'E',
+        templateUrl: 'app/assets/template/compmodal.html',
+        controller: 'listController'
     };
 });

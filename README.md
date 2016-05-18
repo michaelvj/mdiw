@@ -26,7 +26,8 @@
 	- Executing queries on databases linked to selected company
 
 ### Database - querying
-	- Executing queries on selected SQL Server database using PHP as back end language.
+	- Confirmation of query execution
+	- Executing queries on selected SQL Server database using PHP as back end language. 
 	- Escaping the input before executing query
 
 - Add proper routing functionality with named views. ```ui-router```

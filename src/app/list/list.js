@@ -4,9 +4,7 @@
 *
 * Description
 */
-angular.module('manipulareApp', [])
-
-    .controller('listController', function($scope, $http){
+Manipulare.controller('listController', function($scope, $http){
         var vm = this;
         angular.element(document).ready(function (){
             vm.isDisabled = true;
@@ -51,6 +49,9 @@ angular.module('manipulareApp', [])
                     case "columbo":
                         vm.applicationurl = 'inspectionworld.nl';
                         break;
+                    default:
+                        vm.applicationurl = 'undefined';
+                        break;
                 }
 
                 vm.url = vm.application + '_' + vm.company + '.' + vm.applicationurl;
@@ -61,18 +62,34 @@ angular.module('manipulareApp', [])
              * @return {[type]} [description]
              */
             $scope.newComp = function() {
-                vm.company = window.prompt('Vul een bedrijfsnaam in.');
+                varcompany = window.prompt('Vul een bedrijfsnaam in.');
                 vm.application = window.prompt('Vul de applicatie in.');
 
-                if(vm.company !== "") {
+                vm.inarray = $scope.inArray(vm.company, vm.names);
+                if(!vm.inarray && vm.application !== '' && vm.company !== '') {
                     console.log(vm.company);
                     console.log(vm.application);
-                    
+                    console.log(vm.names);
                     vm.url = $scope.makeUrl(vm.company, vm.application);
                     console.log(vm.url);
+
+
+                    // vm.newcomp = array(
+                    //     vm.company => array (
+                    //     'Host' => '172.20.1.90',
+                    //     'User' => 'mns',
+                    //     'Pass' => 'Welcome110#',
+                    //     'DBName' => vm.url
+                    //     )
+                    // );
+                    console.log(vm.newcomp);
                 }
             }
 
-
-
-    });
+            $scope.inArray = function(needle, haystack) {
+                for(var i = 0; i < haystack.length; i++) {
+                    if(haystack[i] == needle) return true;
+                }
+                return false;
+            }    
+});

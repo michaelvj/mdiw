@@ -4,8 +4,8 @@
 *
 * Description
 */
-angular.module('manipulareApp', [])
-    .controller('queryController', function($scope, $http) {
+
+Manipulare.controller('queryController', function($scope, $http) {
         var query = this;
 
         $scope.querySubmit = function() {
@@ -22,7 +22,7 @@ angular.module('manipulareApp', [])
             // {
             //     console.log('error');
             // });
-
+            
             var request = $http({
                 url: "/app/querying/query-ajax.php",
                 method: "POST",
