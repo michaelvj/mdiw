@@ -16,14 +16,14 @@ Manipulare.controller('listController', function($scope, $http){
             });
 
             request.success(function(data) {
+                vm.truelist = data;
                 vm.companies =[];
                 vm.names = [];
                 $.each(data, function(key, element) {
                     vm.companies.push({'name' : key, 'values' : element});
                     vm.names.push(key);
                 });
-                console.log(vm.companies);
-                console.log(vm.names);
+                console.log(data);
 
             });
         });
@@ -31,7 +31,6 @@ Manipulare.controller('listController', function($scope, $http){
             $scope.enableEdit = function(id) {
                 if(vm.isDisabled) {
                     $('#' + id + ' input').attr('disabled', false);
-                    console.log(id);
                     vm.isDisabled = false;
                 } else {
                     $('#' + id + ' input').attr('disabled', true);
@@ -42,15 +41,15 @@ Manipulare.controller('listController', function($scope, $http){
             $scope.makeUrl = function(company, application) {
                 vm.company = company;
                 vm.application = application;
-                switch(vm.application) {
+                switch(vm.application && vm.company) {
                     case "biom":
                         vm.applicationurl = 'biom.nl';
                         break;
-                    case "columbo":
+                    case "Columbo":
                         vm.applicationurl = 'inspectionworld.nl';
                         break;
                     default:
-                        vm.applicationurl = 'undefined';
+                        vm.applicationurl = 'inspectionworld.nl';
                         break;
                 }
 
@@ -62,34 +61,74 @@ Manipulare.controller('listController', function($scope, $http){
              * @return {[type]} [description]
              */
             $scope.newComp = function() {
-                varcompany = window.prompt('Vul een bedrijfsnaam in.');
-                vm.application = window.prompt('Vul de applicatie in.');
-
+                vm.company = window.prompt('Vul een bedrijfsnaam in.');
+                vm.applicationprompt = window.prompt('Vul de applicatie in.');
+                
+                console.log(vm.application);
                 vm.inarray = $scope.inArray(vm.company, vm.names);
-                if(!vm.inarray && vm.application !== '' && vm.company !== '') {
-                    console.log(vm.company);
-                    console.log(vm.application);
-                    console.log(vm.names);
-                    vm.url = $scope.makeUrl(vm.company, vm.application);
-                    console.log(vm.url);
+                if(!vm.inarray && vm.application !== '' && vm.company !== '' && vm.company !== null && vm.application !== null) {
+                    vm.application = $scope.capitalizeFirstLetter(vm.applicationprompt);
+                    // console.log(vm.company);
+                    // console.log(vm.application);
+                    vm.url = $scope.makeUrl(vm.company.toLowerCase(), vm.application);
+                    // console.log(vm.url);
+                    vm.companylist = vm.companies;
+                    vm.newcomp =                         
+                    {
+                        'Host': '172.20.1.90',
+                        'User': 'mns',
+                        'Pass': 'Welcome110#',
+                        'DBName': vm.url 
+                    };
+                    vm.companies.push({'name' : vm.company.toLowerCase(), 'values' : vm.newcomp});
+                    vm.names.push(vm.company);
+                    // console.log(vm.companies);
 
-
-                    // vm.newcomp = array(
-                    //     vm.company => array (
-                    //     'Host' => '172.20.1.90',
-                    //     'User' => 'mns',
-                    //     'Pass' => 'Welcome110#',
-                    //     'DBName' => vm.url
-                    //     )
-                    // );
-                    console.log(vm.newcomp);
+                    $scope.mergeNewCompany(vm.companylist);
                 }
             }
 
             $scope.inArray = function(needle, haystack) {
                 for(var i = 0; i < haystack.length; i++) {
-                    if(haystack[i] == needle) return true;
+                    if(haystack[i] == needle) {
+                        return true;
+                    }
                 }
                 return false;
             }    
+
+            $scope.capitalizeFirstLetter = function(string) {
+                return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
+            }
+
+            $scope.mergeNewCompany = function(array) {
+                var updatedcompanies = {};
+                $.each(array, function( key, values) {
+                    updatedcompanies[values.name] = values.values;
+
+                });
+
+                console.log(updatedcompanies);
+            }
+
+            $scope.updateCompany = function(compid) {
+                $scope.enableEdit(compid);
+                var editedcomp = $('#' + compid + ' :eq(1) input');
+                console.log(editedcomp.length);
+                console.log(vm.companies);
+                console.log(editedcomp);
+                var memedeux = [];
+
+                var indexid = vm.names.indexOf(compid);
+                console.log(indexid);
+
+                $.each(editedcomp, function(key, value) {
+                    console.log(value.name);
+                    console.log(value.value);
+                    
+                    memedeux[value.name] = value.value; 
+                });
+                console.log(memedeux);
+                console.log(vm.companies[0]);
+            }
 });
