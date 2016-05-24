@@ -13,6 +13,9 @@
 ## CRUD
 
 ### Company - compconfig/list
+    - Information added to the companies are static (JSConfig/PDFTemplates), So adding them with a multiselect box is a viable option.
+    - Creating prebuilt options for selections.
+    - When adding fields to a company check which fields are already in the list, and filter those out of the selection menu.
 	- Creating new company server configurations - Using bootstrap modal with preset host-user-pass-dbname based on the company name
         - Initialize a prompt with the company name desired.
         - Initialize a bootstrap modal with generated fields : host-user-pass-DBName
@@ -27,7 +30,7 @@
 
 ### Database - querying
 	- Confirmation of query execution
-	- Executing queries on selected SQL Server database using PHP as back end language. 
+	- Executing queries on selected SQL Server database using PHP as back end language.
 	- Escaping the input before executing query
 
 - Add proper routing functionality with named views. ```ui-router```

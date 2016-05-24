@@ -63,8 +63,8 @@ Manipulare.controller('listController', function($scope, $http){
             $scope.newComp = function() {
                 vm.company = window.prompt('Vul een bedrijfsnaam in.');
                 vm.applicationprompt = window.prompt('Vul de applicatie in.');
-                
-                console.log(vm.application);
+
+                console.log(vm.applicationprompt);
                 vm.inarray = $scope.inArray(vm.company, vm.names);
                 if(!vm.inarray && vm.application !== '' && vm.company !== '' && vm.company !== null && vm.application !== null) {
                     vm.application = $scope.capitalizeFirstLetter(vm.applicationprompt);
@@ -73,12 +73,12 @@ Manipulare.controller('listController', function($scope, $http){
                     vm.url = $scope.makeUrl(vm.company.toLowerCase(), vm.application);
                     // console.log(vm.url);
                     vm.companylist = vm.companies;
-                    vm.newcomp =                         
+                    vm.newcomp =
                     {
                         'Host': '172.20.1.90',
                         'User': 'mns',
                         'Pass': 'Welcome110#',
-                        'DBName': vm.url 
+                        'DBName': vm.url
                     };
                     vm.companies.push({'name' : vm.company.toLowerCase(), 'values' : vm.newcomp});
                     vm.names.push(vm.company);
@@ -95,7 +95,7 @@ Manipulare.controller('listController', function($scope, $http){
                     }
                 }
                 return false;
-            }    
+            }
 
             $scope.capitalizeFirstLetter = function(string) {
                 return string.charAt(0).toUpperCase() + string.slice(1).toLowerCase();
@@ -120,15 +120,14 @@ Manipulare.controller('listController', function($scope, $http){
                 var memedeux = [];
 
                 var indexid = vm.names.indexOf(compid);
-                console.log(indexid);
+
 
                 $.each(editedcomp, function(key, value) {
-                    console.log(value.name);
-                    console.log(value.value);
-                    
-                    memedeux[value.name] = value.value; 
+                    memedeux[value.name] = value.value;
                 });
                 console.log(memedeux);
-                console.log(vm.companies[0]);
+                console.log(vm.companies[indexid].values);
+
+                //  call function with ajax call to php with the updated array to replace companies.php content
             }
 });
