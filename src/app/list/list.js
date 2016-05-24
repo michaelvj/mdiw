@@ -38,23 +38,25 @@ Manipulare.controller('listController', function($scope, $http){
                 }
             }
 
-            $scope.makeUrl = function(company, application) {
-                vm.company = company;
-                vm.application = application;
-                switch(vm.application && vm.company) {
-                    case "biom":
-                        vm.applicationurl = 'biom.nl';
-                        break;
-                    case "Columbo":
-                        vm.applicationurl = 'inspectionworld.nl';
-                        break;
-                    default:
-                        vm.applicationurl = 'inspectionworld.nl';
-                        break;
-                }
+            $scope.makeUrl = function(company, field) {
+                var company = company;
+                var application = "Columbo";
+                var applicationurl = "inspectionworld.nl";
 
-                vm.url = vm.application + '_' + vm.company + '.' + vm.applicationurl;
-                return vm.url;
+                switch(field){
+                    case 'dbname':
+                        var fieldrequest = application + '_' + company + '.' + applicationurl;
+                        break;
+                    case 'jsconfig':
+                        var fieldrequest = {'JSConfig': {
+                            'oDataServiceHost': 'http://' + company + applicationurl + '/columboWS/columboGBSWS.svc/',
+                            'PDFURL': 'http://' + company + applicationurl + '/columboWS/reportViewer.aspx/',
+                            'ImagesURL': 'http://' + company + applicationurl + '/columboWS/retrieveimage.aspx/',
+                            'ColumboAppURL': 'http://' + company + applicationurl + '/columboApp'
+                        }};
+}
+                
+                return fieldrequest;
             }
             /**
              * [newComp description]
@@ -62,15 +64,12 @@ Manipulare.controller('listController', function($scope, $http){
              */
             $scope.newComp = function() {
                 vm.company = window.prompt('Vul een bedrijfsnaam in.');
-                vm.applicationprompt = window.prompt('Vul de applicatie in.');
 
                 console.log(vm.applicationprompt);
                 vm.inarray = $scope.inArray(vm.company, vm.names);
-                if(!vm.inarray && vm.application !== '' && vm.company !== '' && vm.company !== null && vm.application !== null) {
-                    vm.application = $scope.capitalizeFirstLetter(vm.applicationprompt);
-                    // console.log(vm.company);
-                    // console.log(vm.application);
-                    vm.url = $scope.makeUrl(vm.company.toLowerCase(), vm.application);
+                if(!vm.inarray && vm.company !== '' && vm.company !== null) {
+
+                    vm.url = $scope.makeUrl(vm.company.toLowerCase(), 'dbname');
                     // console.log(vm.url);
                     vm.companylist = vm.companies;
                     vm.newcomp =
@@ -121,13 +120,34 @@ Manipulare.controller('listController', function($scope, $http){
 
                 var indexid = vm.names.indexOf(compid);
 
+                var meme = $scope.makeUrl(compid, 'jsconfig');
 
-                $.each(editedcomp, function(key, value) {
-                    memedeux[value.name] = value.value;
-                });
+                console.log(meme.JSConfig);
+
+
+                
+
+                    $.each(editedcomp, function(key, value) {
+                        if(!(value.name in meme.JSConfig)){
+                            memedeux[value.name] = value.value;
+                        }
+                    }); 
+                if(editedcomp[editedcomp.length - 1].name === "ColumboAppURL"){
+                    memedeux.JSConfig = meme.JSConfig;
+                }
+
                 console.log(memedeux);
                 console.log(vm.companies[indexid].values);
 
+
                 //  call function with ajax call to php with the updated array to replace companies.php content
+            }
+
+            $scope.getJSConfig = function(array) {
+
+            }
+
+            $scope.getPDFTemplates = function(string) {
+                var PDFTemplates = {"Trap": {}, "BIOM"}
             }
 });
