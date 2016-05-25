@@ -6,6 +6,7 @@
 */
 Manipulare.controller('listController', function($scope, $http){
         var vm = this;
+
         angular.element(document).ready(function (){
             vm.isDisabled = true;
             var request = $http({
@@ -54,7 +55,7 @@ Manipulare.controller('listController', function($scope, $http){
                             'ImagesURL': 'http://' + company + applicationurl + '/columboWS/retrieveimage.aspx/',
                             'ColumboAppURL': 'http://' + company + applicationurl + '/columboApp'
                         }};
-}
+                }
                 
                 return fieldrequest;
             }
@@ -113,29 +114,31 @@ Manipulare.controller('listController', function($scope, $http){
             $scope.updateCompany = function(compid) {
                 $scope.enableEdit(compid);
                 var editedcomp = $('#' + compid + ' :eq(1) input');
-                console.log(editedcomp.length);
-                console.log(vm.companies);
-                console.log(editedcomp);
+                var PDFTemplates = $scope.getPDFTemplates();
                 var memedeux = [];
-
                 var indexid = vm.names.indexOf(compid);
-
                 var meme = $scope.makeUrl(compid, 'jsconfig');
 
                 console.log(meme.JSConfig);
-
+                console.log(editedcomp.length);
+                console.log(vm.companies);
+                console.log(editedcomp);
 
                 
 
-                    $.each(editedcomp, function(key, value) {
-                        if(!(value.name in meme.JSConfig)){
-                            memedeux[value.name] = value.value;
-                        }
-                    }); 
+                $.each(editedcomp, function(key, value) {
+                    if(!(value.name in meme.JSConfig) || !(value.name in PDFTemplates)){
+                        memedeux[value.name] = value.value;
+                    }
+                }); 
+                console.log(memedeux);
+
                 if(editedcomp[editedcomp.length - 1].name === "ColumboAppURL"){
                     memedeux.JSConfig = meme.JSConfig;
                 }
+                
 
+                console.log(PDFTemplates);
                 console.log(memedeux);
                 console.log(vm.companies[indexid].values);
 
@@ -143,11 +146,24 @@ Manipulare.controller('listController', function($scope, $http){
                 //  call function with ajax call to php with the updated array to replace companies.php content
             }
 
-            $scope.getJSConfig = function(array) {
+            $scope.getJSConfig = function(compid) {
+                var meme = $scope.makeUrl(compid, 'jsconfig');
+                var PDFTemplates = $scope.getPDFTemplates();
 
+                meme.JSConfig.PDFTemplates = PDFTemplates[0].PDFTemplates;
+                console.log(meme);
             }
 
-            $scope.getPDFTemplates = function(string) {
-                var PDFTemplates = {"Trap": {}, "BIOM"}
+            $scope.getPDFTemplates = function() {
+                var PDFTemplates =  [{'PDFTemplates' :
+                                {'NeN3140': {0: 'Template1', 1: 'Template2'},
+                                'BIOM': {0: 'Template1', 1: 'Template2'},
+                                'Trap': {0:'Insprapport'}, 
+                                'Fire': {0: 'Insprapport'},
+                                'Demo': {0: 'Insprapport'},
+                                'Tilbanden': {0: 'Insprapport'}}
+                            }];
+
+                return PDFTemplates;
             }
 });
