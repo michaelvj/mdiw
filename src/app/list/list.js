@@ -114,45 +114,62 @@ Manipulare.controller('listController', function($scope, $http){
             $scope.updateCompany = function(compid) {
                 $scope.enableEdit(compid);
                 var editedcomp = $('#' + compid + ' :eq(1) input');
-                var PDFTemplates = $scope.getPDFTemplates();
-                var memedeux = [];
-                var indexid = vm.names.indexOf(compid);
-                var meme = $scope.makeUrl(compid, 'jsconfig');
+                var storedPDFTemplates = $scope.getPDFTemplates();
+                var updatecompany = [];
+                var PDFTemplates = {};
+                var tindexid = vm.names.indexOf(compid);
+                var config = $scope.makeUrl(compid, 'jsconfig');
 
-                console.log(meme.JSConfig);
+                console.log(config.JSConfig);
                 console.log(editedcomp.length);
-                console.log(vm.companies);
                 console.log(editedcomp);
 
                 
 
                 $.each(editedcomp, function(key, value) {
-                    if(!(value.name in meme.JSConfig) || !(value.name in PDFTemplates)){
-                        memedeux[value.name] = value.value;
+                    if(!(value.name in config.JSConfig) && !(value.name in storedPDFTemplates[0].PDFTemplates)){
+                        
+                        if(value.value === ""){
+                            return alert("Fields cant be empty, if you wish to delete fields please use the delete button below.");
+
+                        } else { 
+                            updatecompany[value.name] = value.value;
+                        }
+                    } else if((value.name in storedPDFTemplates[0].PDFTemplates)) {
+
+                        if(storedPDFTemplates[0].PDFTemplates.hasOwnProperty(value.name)) {
+                            var PDFTemplate = storedPDFTemplates[0].PDFTemplates[value.name];
+                            //do something with value;
+                            PDFTemplates[value.name] = PDFTemplate;
+                        }
+                        console.log(PDFTemplates);
                     }
                 }); 
-                console.log(memedeux);
-
-                if(editedcomp[editedcomp.length - 1].name === "ColumboAppURL"){
-                    memedeux.JSConfig = meme.JSConfig;
+                    
+                if(editedcomp.length > 7){
+                    updatecompany.JSConfig = config.JSConfig;
+                    if(!$.isEmptyObject(PDFTemplates)) {
+                        updatecompany.JSConfig.PDFTemplates = PDFTemplates;
+                    }
                 }
                 
 
-                console.log(PDFTemplates);
-                console.log(memedeux);
-                console.log(vm.companies[indexid].values);
+                console.log(storedPDFTemplates);
+                console.log(updatecompany);
+                console.log(vm.companies[tindexid].values);
 
 
                 //  call function with ajax call to php with the updated array to replace companies.php content
             }
 
-            $scope.getJSConfig = function(compid) {
-                var meme = $scope.makeUrl(compid, 'jsconfig');
-                var PDFTemplates = $scope.getPDFTemplates();
+            // $scope.getJSConfig = function(compid) {
+            //     var config = $scope.makeUrl(compid, 'jsconfig');
+            //     var PDFTemplates = $scope.getPDFTemplates();
+            //     var JSConfig = [];
 
-                meme.JSConfig.PDFTemplates = PDFTemplates[0].PDFTemplates;
-                console.log(meme);
-            }
+            //     config.JSConfig.PDFTemplates = PDFTemplates[0].PDFTemplates;
+            //     console.log(config);
+            // }
 
             $scope.getPDFTemplates = function() {
                 var PDFTemplates =  [{'PDFTemplates' :
