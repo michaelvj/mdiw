@@ -64,24 +64,18 @@ Manipulare.controller('listController', function($scope, $http){
              * @return {[type]} [description]
              */
             $scope.newComp = function() {
-                vm.company = window.prompt('Vul een bedrijfsnaam in.');
+                var company = window.prompt('Vul een bedrijfsnaam in.');
 
                 console.log(vm.applicationprompt);
-                vm.inarray = $scope.inArray(vm.company, vm.names);
-                if(!vm.inarray && vm.company !== '' && vm.company !== null) {
+                var inarray = $scope.inArray(company, vm.names);
+                if(!inarray && company !== '' && company !== null) {
 
-                    vm.url = $scope.makeUrl(vm.company.toLowerCase(), 'dbname');
+                    
                     // console.log(vm.url);
                     vm.companylist = vm.companies;
-                    vm.newcomp =
-                    {
-                        'Host': '172.20.1.90',
-                        'User': 'mns',
-                        'Pass': 'Welcome110#',
-                        'DBName': vm.url
-                    };
-                    vm.companies.push({'name' : vm.company.toLowerCase(), 'values' : vm.newcomp});
-                    vm.names.push(vm.company);
+                    var newcomp = $scope.baseConfig(company);
+                    vm.companies.push({'name' : company.toLowerCase(), 'values' : newcomp});
+                    vm.names.push(company);
                     // console.log(vm.companies);
 
                     $scope.mergeNewCompany(vm.companylist);
@@ -95,6 +89,19 @@ Manipulare.controller('listController', function($scope, $http){
                     }
                 }
                 return false;
+            }
+
+            $scope.baseConfig = function (company) {
+                var url = $scope.makeUrl(company.toLowerCase(), 'dbname');
+                var newcomp =
+                    {
+                        'Host': '172.20.1.90',
+                        'User': 'mns',
+                        'Pass': 'Welcome110#',
+                        'DBName': vm.url
+                    };
+
+                return newcomp;
             }
 
             $scope.capitalizeFirstLetter = function(string) {
@@ -112,34 +119,27 @@ Manipulare.controller('listController', function($scope, $http){
             }
 
             $scope.updateCompany = function(compid) {
+                
                 $scope.enableEdit(compid);
                 var editedcomp = $('#' + compid + ' :eq(1) input');
                 var storedPDFTemplates = $scope.getPDFTemplates();
-                var updatecompany = [];
+                var updatecompany = {};
                 var PDFTemplates = {};
                 var tindexid = vm.names.indexOf(compid);
                 var config = $scope.makeUrl(compid, 'jsconfig');
-
-                console.log(config.JSConfig);
-                console.log(editedcomp.length);
-                console.log(editedcomp);
-
-                
-
+            
+                var baseconfig = $scope.baseConfig(compid);
                 $.each(editedcomp, function(key, value) {
                     if(!(value.name in config.JSConfig) && !(value.name in storedPDFTemplates[0].PDFTemplates)){
-                        
                         if(value.value === ""){
-                            return alert("Fields cant be empty, if you wish to delete fields please use the delete button below.");
+                            updatecompany[value.name] = baseconfig[value.name]
 
                         } else { 
                             updatecompany[value.name] = value.value;
                         }
                     } else if((value.name in storedPDFTemplates[0].PDFTemplates)) {
-
                         if(storedPDFTemplates[0].PDFTemplates.hasOwnProperty(value.name)) {
                             var PDFTemplate = storedPDFTemplates[0].PDFTemplates[value.name];
-                            //do something with value;
                             PDFTemplates[value.name] = PDFTemplate;
                         }
                         console.log(PDFTemplates);
@@ -153,7 +153,9 @@ Manipulare.controller('listController', function($scope, $http){
                     }
                 }
                 
-
+                console.log(config.JSConfig);
+                console.log(editedcomp.length);
+                console.log(editedcomp);   
                 console.log(storedPDFTemplates);
                 console.log(updatecompany);
                 console.log(vm.companies[tindexid].values);
